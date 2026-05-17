@@ -1,5 +1,6 @@
 #import FastAPI class from fastapi module or package
 from fastapi import FastAPI
+from pydantic import BaseModel # pydantic handle datatype chceking, validation and request parsing 
 
 #create object of FastAPI class and assign it to variable app
 app = FastAPI()
@@ -55,3 +56,25 @@ def get_student(student_id: int):
         "total_marks": total_marks,
         "percentage": percentage
     }
+
+
+#expected structure of incoming JSON data for creating a new student record
+class Student(BaseModel): #BaseModel is a class from pydantic module that we can use to define the expected structure of incoming JSON data for creating a new student record
+    id:int
+    name:str
+    maths:float
+    science:float
+    english:float
+
+
+#Creating post API to add new student record
+@app.post("/student")
+def add_student(student:Student): #receive request body conevrt into student object and validate automatically.
+    #add student into dictonary
+    students[student.id]={
+        "name": student.name,
+        "maths": student.maths,
+        "science": student.science,
+        "english": student.english
+    }
+    return {"message": f"student {student.name} added successfully!"}
