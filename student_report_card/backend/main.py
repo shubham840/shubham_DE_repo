@@ -126,3 +126,12 @@ def update_student_record(student_id:int, student:Student):
     }
     return {"message": f"student {student_id} updated successfully!"}
 
+#delete student record use delete api
+@app.delete("/student/{student_id}")
+def delete_student(student_id: int):
+    # check if student exist or not
+    if student_id not in students:
+        return {"error": "Student not found"} # return error message if student not found
+    #delete student record
+    del students[student_id]
+    return {"message": f"student {student_id} deleted successfully!"}
