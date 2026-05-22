@@ -20,7 +20,7 @@ function App() {
 
   const handleSubmit = async () => {
 
-    const response = await fetch("http://127.0.0.1:8000/student", {
+    const response = await fetch("https://student-report-card-api.onrender.com/student", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
