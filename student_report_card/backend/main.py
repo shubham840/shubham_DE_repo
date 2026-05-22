@@ -1,9 +1,21 @@
 #import FastAPI class from fastapi module or package
 from fastapi import FastAPI
 from pydantic import BaseModel # pydantic handle datatype chceking, validation and request parsing 
+from fastapi.middleware.cors import CORSMiddleware # CORS (Cross-Origin Resource Sharing) is a security feature implemented by web browsers to restrict web pages from making requests to a different domain than the one that served the web page. This is done to prevent malicious websites from accessing sensitive data on other domains. 
+#The CORSMiddleware in FastAPI allows you to configure CORS settings for your API, such as which origins are allowed to access the API, which HTTP methods are allowed, and which headers can be included in requests. By using this middleware, you can enable cross-origin requests to your API while still maintaining security.
 
 #create object of FastAPI class and assign it to variable app
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 #students data
 
